@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Mail Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d8cece;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Spam Mail Reporter</h1>
+        <h2>Choose an option:</h2>
+        <button class="button" onclick="reportSpamMail()">Report Spam Mail</button>
+        <button class="button" onclick="reportSpamNumber()">Report Spam Phone Number</button>
+        <button class="button" onclick="checkSpamNumber()">Check Spam Number</button>
+    </div>
+
+    <script>
+        function reportSpamMail() {
+            window.location.href = "report.html";
+        }
+
+        function reportSpamNumber() {
+            window.location.href = "spam_report.html";
+        }
+
+        function checkSpamNumber() {
+            window.location.href = "search.html";
+        }
+    </script>
+</body>
+
+</html>

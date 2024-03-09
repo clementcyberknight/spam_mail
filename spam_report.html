@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Mail Checker</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #b5cce4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            /* Center content horizontally */
+            align-items: center;
+            /* Center content vertically */
+            height: 100vh;
+            /* Take up the full height of the viewport */
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .task-form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .task-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .task-input:focus {
+            outline: none;
+            border-color: #6c63ff;
+        }
+
+        .add-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .add-button:hover {
+            background-color: #4f46e5;
+        }
+
+        .check-result {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .copy-right {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .task-input {
+                flex: 100%;
+            }
+
+            .add-button {
+                flex: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Report Spam Phone Number</h1>
+        </header>
+        <form id="reportForm">
+            <div class="task-form">
+                <input type="input" id="numberInput" class="task-input" placeholder="Enter Phone Number">
+                <input type="date" id="dateInput" class="task-input">
+                <button type="submit" id="reportButton" class="add-button">Report Spam</button>
+            </div>
+        </form>
+        <div id="checkResult" class="check-result"></div>
+        <p class="copy-right">Designed &copy; 2023</p>
+    </div>
+</body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBz57apn0uGOv29G3jHh_zDzjdFAtkNX5E",
+        authDomain: "spamnumberreport.firebaseapp.com",
+        projectId: "spamnumberreport",
+        storageBucket: "spamnumberreport.appspot.com",
+        messagingSenderId: "336177934270",
+        appId: "1:336177934270:web:231f8736a893c2a44153ef"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    document.getElementById("reportButton").addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const number = document.getElementById("numberInput").value;
+        const date = document.getElementById("dateInput").value;
+        const userRef = ref(db, 'users/' + number);  // Create a reference to the user node
+        set(userRef, {
+            number: number,
+            date: date  // Use "date" instead of "dateinput" for consistency
+        })
+            .then(() => {
+                alert("phonenumber Reported to database!");
+            })
+            .catch((error) => {
+                console.error("Error writing to database:", error);
+            });
+    });
+</script>
+
+</html>
